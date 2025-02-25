@@ -1,42 +1,24 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 
-# def aries(request):
-#     return HttpResponse("Знак зодиака ОВЕН")
-#
-# def taurus(request):
-#     return HttpResponse("Знак зодиака ТЕЛЕЦ")
-#
-# def gemini(request):
-#     return HttpResponse("Знак зодиака БЛИЗНЕЦЫ")
-#
-# def cancer(request):
-#     return HttpResponse("Знак зодиака РАК")
-#
-# def leo(request):
-#     return HttpResponse("Знак зодиака ЛЕВ")
-#
-# def virgo(request):
-#     return HttpResponse("Знак зодиака ДЕВА")
-#
-# def libra(request):
-#     return HttpResponse("Знак зодиака ВЕСЫ")
-#
-# def scorpio(request):
-#     return HttpResponse("Знак зодиака СКОРПИОН")
-#
-# def sagittarius(request):
-#     return HttpResponse("Знак зодиака СТРЕЛЕЦ")
-#
-# def capricorn(request):
-#     return HttpResponse("Знак зодиака КОЗЕРОГ")
-#
-# def aquarius(request):
-#     return HttpResponse("Знак зодиака ВОДОЛЕЙ")
-#
-# def pisces(request):
-#     return HttpResponse("Знак зодиака РЫБЫ")
+signs_zodiac = {
+    'aries': 'Знак зодиака ОВЕН',
+    'taurus': 'Знак зодиака ТЕЛЕЦ',
+    'gemini': 'БЛИЗНЕЦЫ',
+    'cancer': 'РАК',
+    'leo': 'Знак зодиака ЛЕВ',
+    'virgo': 'Знак зодиака ДЕВА',
+    'libra': 'Знак зодиака ВЕСЫ',
+    'scorpio': 'Знак зодиака СКОРПИОН',
+    'sagittarius': 'Знак зодиака СТРЕЛЕЦ',
+    'capricorn': 'Знак зодиака КОЗЕРОГ',
+    'aquarius': 'Знак зодиака ВОДОЛЕЙ',
+    'pisces': 'Знак зодиака РЫБЫ'
+}
 
 def get_info_about_sign_zodiac(request, sign_zodiac):
-    return HttpResponse("Знак зодиака ...")
+    return HttpResponse(signs_zodiac.get(
+        sign_zodiac,
+        HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
+    ))
