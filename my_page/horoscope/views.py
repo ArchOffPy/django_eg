@@ -17,9 +17,11 @@ signs_zodiac = {
 }
 
 
-def get_info_about_sign_zodiac(request, sign_zodiac):
+def get_info_about_sign_zodiac(request, sign_zodiac: str):
     description = signs_zodiac.get(sign_zodiac, None)
     if description:
         return HttpResponse(description)
     return HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
 
+def get_info_about_sign_zodiac_by_num(request, sign_zodiac: int):
+    return HttpResponse(f'Это число {sign_zodiac}')
