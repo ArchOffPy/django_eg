@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 
-
 signs_zodiac = {
     'aries': 'Знак зодиака ОВЕН',
     'taurus': 'Знак зодиака ТЕЛЕЦ',
@@ -17,8 +16,10 @@ signs_zodiac = {
     'pisces': 'Знак зодиака РЫБЫ'
 }
 
+
 def get_info_about_sign_zodiac(request, sign_zodiac):
-    return HttpResponse(signs_zodiac.get(
-        sign_zodiac,
-        HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
-    ))
+    description = signs_zodiac.get(sign_zodiac, None)
+    if description:
+        return HttpResponse(description)
+    return HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
+
