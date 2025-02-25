@@ -16,8 +16,10 @@ def get_task_from_day(request, choice_day: str):
     description = tasks_day.get(choice_day, None)
     if description:
         return HttpResponse(description)
-    return HttpResponseNotFound(f'Не найден день: {choice_day}')
+    return HttpResponseNotFound(f'Такого дня не существует: {choice_day}')
 
 
 def get_task_from_day_by_num(request, choice_day: int):
-    return HttpResponse(f'Это число {choice_day}')
+    if 0 < choice_day < 8:
+        return HttpResponse(f'Сегодня {choice_day}й день недели')
+    return HttpResponseNotFound(f'Не верный номер дня - {choice_day}')
