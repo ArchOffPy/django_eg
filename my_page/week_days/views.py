@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
-
+from django.urls import reverse
 tasks_day = {
     'monday': 'Понедельник. Начать изучать DJANGO 5',
     'tuesday': 'Вторник. Пройти как минимум два блока в курсе по DJANGO 5',
@@ -28,4 +28,5 @@ def get_task_from_day_by_num(request, choice_day: int):
         return HttpResponseNotFound(f'Дня с номером "{choice_day}" не существует')
 
     day_by_num = tasks_day_keys[choice_day - 1]
-    return HttpResponseRedirect(f'/todo_week/{day_by_num}')
+    redirect_url = reverse('days_by_name', args=(day_by_num,))
+    return HttpResponseRedirect(redirect_url)

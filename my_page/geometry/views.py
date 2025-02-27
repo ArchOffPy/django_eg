@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 from math import pi
 
 def get_rectangle_area(request, width: int, height: int):
@@ -24,11 +25,22 @@ def get_circle_area(request, radius: int):
 #     if 'width' in kwargs:
 #         return HttpResponseRedirect(f'/calculate_geometry/square/{kwargs["width"]}')
 
+# def get_shape_area(request, width=None, height=None, radius=None):
+#     url = 'calculate_geometry'
+#     if radius is not None:
+#         return HttpResponseRedirect(f'/{url}/circle/{radius}')
+#     if width is not None and height is not None:
+#         return HttpResponseRedirect(f'/{url}/rectangle/{width}/{height}')
+#     if width is not None:
+#         return HttpResponseRedirect(f'/{url}/square/{width}')
+
 def get_shape_area(request, width=None, height=None, radius=None):
-    url = 'calculate_geometry'
     if radius is not None:
-        return HttpResponseRedirect(f'/{url}/circle/{radius}')
+        redirect_url = reverse('circle', args=(radius,))
+        return HttpResponseRedirect(redirect_url)
     if width is not None and height is not None:
-        return HttpResponseRedirect(f'/{url}/rectangle/{width}/{height}')
+        redirect_url = reverse('rectangle', args=(width, height))
+        return HttpResponseRedirect(redirect_url)
     if width is not None:
-        return HttpResponseRedirect(f'/{url}/square/{width}')
+        redirect_url = reverse('square', args=(width,))
+        return HttpResponseRedirect(redirect_url)
