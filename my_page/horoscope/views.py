@@ -18,6 +18,21 @@ signs_zodiac = {
 }
 
 
+def index(request):
+    signs = list(signs_zodiac)
+
+    elements = ''
+    for sign in signs:
+        redirect_url = reverse('sign_zodiac', args=(sign,))
+        elements += f'<li><a href={redirect_url}>{sign.title()}</a></li>'
+
+    response = f"""
+    <ul>
+        {elements}
+    <ul>
+    """
+    return  HttpResponse(response)
+
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     description = signs_zodiac.get(sign_zodiac, None)
     if description:
