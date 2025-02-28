@@ -18,6 +18,22 @@ signs_zodiac = {
 }
 
 
+class Fire():
+    pass
+
+
+class Earth():
+    pass
+
+
+class Air():
+    pass
+
+
+class Water():
+    pass
+
+
 def index(request):
     signs = list(signs_zodiac)
 
