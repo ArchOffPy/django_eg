@@ -96,8 +96,8 @@ def get_signs_about_elements(request, element):
 
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     """Получение информации о знаке зодиака по имени"""
-    response = render_to_string('horoscope/info_zodiac.html')
-    return HttpResponse(response)
+    # response = render_to_string('week_days/greeting.html')
+    return render(request, 'horoscope/info_zodiac.html')
     # return HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
 
 
