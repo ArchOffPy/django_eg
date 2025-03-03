@@ -4,16 +4,19 @@ from django.urls import reverse
 from math import pi
 
 def get_rectangle_area(request, width: int, height: int):
-    area = width * height
-    return HttpResponse(f'Площадь прямоугольника размером {width}x{height} = {area}')
+    # area = width * height
+    # return HttpResponse(f'Площадь прямоугольника размером {width}x{height} = {area}')
+    return render(request, 'geometry/rectangle.html')
 
 def get_square_area(request, width: int):
-    area = width ** 2
-    return HttpResponse(f'Площадь квадрата размером {width}x{width} = {area}')
+    # area = width ** 2
+    # return HttpResponse(f'Площадь квадрата размером {width}x{width} = {area}')
+    return render(request, 'geometry/square.html')
 
 def get_circle_area(request, radius: int):
-    area = 2 * pi * radius
-    return HttpResponse(f'Площадь круга с радиусом {radius} = {area}')
+    # area = 2 * pi * radius
+    # return HttpResponse(f'Площадь круга с радиусом {radius} = {area}')
+    return render(request, 'geometry/circle.html')
 
 # def get_shape_area(request, **kwargs):
 #     if not len(kwargs):
