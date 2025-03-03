@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.template.loader import render_to_string
 from datetime import date as dt
 
 signs_zodiac = {
@@ -95,10 +96,9 @@ def get_signs_about_elements(request, element):
 
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     """Получение информации о знаке зодиака по имени"""
-    description = signs_zodiac.get(sign_zodiac, None)
-    if description:
-        return HttpResponse(description)
-    return HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
+    response = render_to_string('horoscope/info_zodiac.html')
+    return HttpResponse(response)
+    # return HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
 
 
 def get_info_about_sign_zodiac_by_num(request, sign_zodiac: int):
