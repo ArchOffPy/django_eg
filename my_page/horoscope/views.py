@@ -1,8 +1,11 @@
+from http.client import responses
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
-from django.template.loader import render_to_string
 from datetime import date as dt
+from dataclasses import dataclass
+# from django.template.loader import render_to_string
 
 signs_zodiac = {
     'aries': 'Знак зодиака ОВЕН',
@@ -93,12 +96,31 @@ def get_signs_about_elements(request, element):
         """
     return HttpResponse(response)
 
+@dataclass
+class AboutMe:
+    my_name: str
+    my_age: int
+
+    def __str__(self):
+        return f'Мое имя - {self.my_name}, мой возраст - {self.my_age}'
 
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     """Получение информации о знаке зодиака по имени"""
     # response = render_to_string('week_days/greeting.html')
-    return render(request, 'horoscope/info_zodiac.html')
     # return HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
+    description = signs_zodiac.get(sign_zodiac, None)
+    person = AboutMe('Vitaliy', 34)
+    data = {
+        'description_zodiac': description,
+        'sign_for_title': sign_zodiac,
+        'my_int': 123,
+        'my_float': 3.14,
+        'my_list': [1, 2, 3],
+        'my_tuple': (1, 2, 3),
+        'my_dict': {'name': 'Vitaly', 'age': 34},
+        'my_class': person
+    }
+    return render(request, 'horoscope/info_zodiac.html', context=data)
 
 
 def get_info_about_sign_zodiac_by_num(request, sign_zodiac: int):

@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Signs ZODIAC</title>
+    <title>Гороскоп для {{ sign_for_title }}</title>
 </head>
 <body>
     <h1>ПРИЛОЖЕНИЕ ГОРОСКОП</h1>
-    <h2>'Знак зодиака ОВЕН'</h2>
+    <h2>{{ description_zodiac }}</h2>
+    <p>Целое число: {{ my_int }}</p>
+    <p>Вещественное число: {{ my_float }}</p>
+    <p>Список: {{ my_list }}</p>
+    <p>Кортеж {{ my_tuple }}</p>
+    <p>Словарь {{ my_dict }}</p>
+    <p>Ключи и значения словаря: {{ my_dict.name }} {{ my_dict.age }}</p>
+    <p>Класс: {{ my_class }}</p>
+    <p>Атрибут класса: {{ my_class.my_name }}</p>
+    <p>Атрибут класса: {{ my_class.my_age }}</p>
 </body>
 </html>
