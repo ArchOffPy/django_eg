@@ -112,6 +112,7 @@ def get_info_about_sign_zodiac(request, sign_zodiac: str):
     person = AboutMe('Vitaliy', 34)
     data = {
         'description_zodiac': description,
+        'incorrect_sign_zodiac': sign_zodiac,
         'sign_for_title': sign_zodiac,
         'my_int': 123,
         'my_float': 3.14,
