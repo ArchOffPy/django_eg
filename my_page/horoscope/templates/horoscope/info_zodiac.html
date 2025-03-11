@@ -1,15 +1,14 @@
-{% extends 'base.html' %} # Расширение базового шаблона
+{% extends 'base.html' %}
 
-# это попадает в блок title базового шаблона base.html
 {% block title %}
     Гороскоп для {{ sign_for_title|upper }}
 {% endblock %}
 
-# это попадает в блок content базового шаблона base.html
 {% block content %}
     <h2>Content from info_zodiac.html</h2>
 
     {% include 'includes/navbar.html' %}
+
 
     {% if description_zodiac is None %}
         <p>Такого знака не существует - {{ incorrect_sign_zodiac }}</p>
