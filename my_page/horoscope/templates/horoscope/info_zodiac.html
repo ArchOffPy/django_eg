@@ -1,26 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Гороскоп для {{ sign_for_title|upper }}</title>
-</head>
-<body>
-    <h1>ПРИЛОЖЕНИЕ ГОРОСКОП</h1>
+{% extends 'base.html' %} # Расширение базового шаблона
 
+# это попадает в блок title базового шаблона base.html
+{% block title %}
+    Гороскоп для {{ sign_for_title|upper }}
+{% endblock %}
+
+# это попадает в блок content базового шаблона base.html
+{% block content %}
+    <h2>Content from info_zodiac.html</h2>
     {% if description_zodiac is None %}
         <p>Такого знака не существует - {{ incorrect_sign_zodiac }}</p>
     {% else %}
         <h2>{{ description_zodiac|capfirst|safe }}</h2>
     {% endif %}
-
-    <p>Целое число: {{ my_int|add:'100' }}</p>
-    <p>Вещественное число: {{ my_float }}</p>
-    <p>Список: {{ my_list|first }}</p>
-    <p>Кортеж {{ my_tuple|last }}</p>
-    <p>Словарь {{ my_dict }}</p>
-    <p>Ключи и значения словаря: {{ my_dict.name }} {{ my_dict.age }}</p>
-    <p>Класс: {{ my_class }}</p>
-    <p>Атрибут класса: {{ my_class.my_name }}</p>
-    <p>Атрибут класса: {{ my_class.my_age }}</p>
-</body>
-</html>
+{% endblock %}
