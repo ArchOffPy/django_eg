@@ -48,18 +48,11 @@ signs_zodiac_by_day = {
 def index(request):
     """Главная страница со знаками зодиака"""
     signs = list(signs_zodiac)
-
-    elements = ''
-    for sign in signs:
-        redirect_url = reverse('name_zodiac', args=(sign,))
-        elements += f'<li><a href={redirect_url}>{sign.title()}</a></li>'
-
-    response = f"""
-    <ul>
-        {elements}
-    <ul>
-    """
-    return HttpResponse(response)
+    data = {
+        'signs': signs,
+        'collect': {}
+    }
+    return render(request, 'horoscope/index.html', context=data)
 
 
 def get_element_page(request):

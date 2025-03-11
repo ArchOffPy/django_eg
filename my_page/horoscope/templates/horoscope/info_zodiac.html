@@ -10,7 +10,7 @@
     {% if description_zodiac is None %}
         <p>Такого знака не существует - {{ incorrect_sign_zodiac }}</p>
     {% else %}
-        <h2>{{ description_zodiac }}</h2>
+        <h2>{{ description_zodiac|capfirst|safe }}</h2>
     {% endif %}
 
     <p>Целое число: {{ my_int|add:'100' }}</p>
