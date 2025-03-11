@@ -50,7 +50,6 @@ def index(request):
     signs = list(signs_zodiac)
     data = {
         'signs': signs,
-        'collect': {}
     }
     return render(request, 'horoscope/index.html', context=data)
 
