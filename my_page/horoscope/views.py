@@ -57,18 +57,22 @@ def index(request):
 def get_element_page(request):
     """Страница со стихиями"""
     elements = list(elements_zodiac)
+    data = {
+        'elements': elements,
+    }
+    return render(request, 'horoscope/types.html', context=data)
 
-    li_elements = ''
-    for element in elements:
-        redirect_url = reverse('get_signs_about_elements', args=(element,))
-        li_elements += f'<li><a href={redirect_url}>{element.title()}</a></li>'
-
-    response = f"""
-    <ul>
-        {li_elements}
-    </ul>
-    """
-    return HttpResponse(response)
+    # li_elements = ''
+    # for element in elements:
+    #     redirect_url = reverse('get_signs_about_elements', args=(element,))
+    #     li_elements += f'<li><a href={redirect_url}>{element.title()}</a></li>'
+    #
+    # response = f"""
+    # <ul>
+    #     {li_elements}
+    # </ul>
+    # """
+    # return HttpResponse(response)
 
 
 def get_signs_about_elements(request, element):
@@ -88,30 +92,15 @@ def get_signs_about_elements(request, element):
         """
     return HttpResponse(response)
 
-@dataclass
-class AboutMe:
-    my_name: str
-    my_age: int
 
-    def __str__(self):
-        return f'Мое имя - {self.my_name}, мой возраст - {self.my_age}'
-
-def get_info_about_sign_zodiac(request, sign_zodiac: str):
+def get_info_about_sign_zodiac_by_name(request, sign_zodiac: str):
     """Получение информации о знаке зодиака по имени"""
-    # response = render_to_string('week_days/greeting.html')
-    # return HttpResponseNotFound(f'Такого знака не существует - {sign_zodiac}')
+
     description = signs_zodiac.get(sign_zodiac, None)
-    person = AboutMe('Vitaliy', 34)
     data = {
         'description_zodiac': description,
         'incorrect_sign_zodiac': sign_zodiac,
         'sign_for_title': sign_zodiac,
-        'my_int': 123,
-        'my_float': 3.14,
-        'my_list': [1, 2, 3],
-        'my_tuple': (1, 2, 3),
-        'my_dict': {'name': 'Vitaly', 'age': 34},
-        'my_class': person
     }
     return render(request, 'horoscope/info_zodiac.html', context=data)
 

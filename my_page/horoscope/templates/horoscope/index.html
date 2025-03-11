@@ -10,13 +10,13 @@
 {% block content %}
     <h2>Content from index.html</h2>
 
-    <nav>
-        <a href="{% url '' %}"></a>
-    </nav>
+    {% include 'includes/navbar.html' %}
 
     <ul>
     {% for sign in signs %}
         <li><b><a href="{% url 'name_zodiac' sign_zodiac=sign %}">{{ forloop.counter }} {{ sign|title }}</a></b></li>
     {% endfor %}
     </ul>
+
+    {% include 'includes/navbar.html' %}
 {% endblock %}
