@@ -7,7 +7,7 @@
 
 # это попадает в блок title базового шаблона base.html
 {% block title %}
-    Types
+    Types_signs
 {% endblock %}
 
 
@@ -17,9 +17,8 @@
     {% include 'includes/navbar.html' %}
 
     <ul>
-    {% for element in elements %}
-        <li><b><a href="{% url 'get_signs_about_elements' element=element %}">
-            {{ forloop.counter }} {{ element|title }}</a></b></li>
+    {% for sign in signs %}
+        <li><b><a href="{% url 'name_zodiac' sign_zodiac=sign %}">{{ sign|title }}</a></b></li>
     {% endfor %}
     </ul>
 {% endblock %}

@@ -1,22 +1,23 @@
-{% extends 'base.html' %} # Расширение базового шаблона
+{% extends 'base.html' %}
 
-# это попадает в блок title базового шаблона base.html
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'horoscope/css/index.css' %}">
+{% endblock %}
+
+
 {% block title %}
     Menu
 {% endblock %}
 
 
-# это попадает в блок content базового шаблона base.html
+
 {% block content %}
-    <h2>Content from index.html</h2>
-
-    {% include 'includes/navbar.html' %}
-
+    <h1>ЗНАКИ ЗОДИАКА</h1>
     <ul>
     {% for sign in signs %}
-        <li><b><a href="{% url 'name_zodiac' sign_zodiac=sign %}">{{ forloop.counter }} {{ sign|title }}</a></b></li>
+        <li><b><a href="{% url 'name_zodiac' sign_zodiac=sign %}">{{ sign|title }}</a></b></li>
     {% endfor %}
     </ul>
 
-    {% include 'includes/navbar.html' %}
 {% endblock %}
