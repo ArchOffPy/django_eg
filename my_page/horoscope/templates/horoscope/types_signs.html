@@ -1,0 +1,25 @@
+{% extends 'base.html' %} # Расширение базового шаблона
+
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'horoscope/css/index.css' %}">
+{% endblock %}
+
+# это попадает в блок title базового шаблона base.html
+{% block title %}
+    Types
+{% endblock %}
+
+
+# это попадает в блок content базового шаблона base.html
+{% block content %}
+
+    {% include 'includes/navbar.html' %}
+
+    <ul>
+    {% for element in elements %}
+        <li><b><a href="{% url 'get_signs_about_elements' element=element %}">
+            {{ forloop.counter }} {{ element|title }}</a></b></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
