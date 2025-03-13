@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load my_filter %}
 
 {% block css_additional %}
     <link rel="stylesheet" href="{% static 'horoscope/css/info_zodiac.css' %}">
@@ -13,7 +14,8 @@
 {% block content %}
 
     {% include 'includes/navbar.html' %}
-    <h1>{{ ru_name_zodiac }}</h1>
+
+    <h1>{{ description_zodiac|split|first }}</h1>
 
     {% if description_zodiac is None %}
         <p>Такого знака не существует - {{ incorrect_sign_zodiac }}</p>

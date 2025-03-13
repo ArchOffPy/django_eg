@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load my_filter %}
 {% block css_additional %}
     <link rel="stylesheet" href="{% static 'horoscope/css/index.css' %}">
 {% endblock %}
@@ -15,8 +16,8 @@
 {% block content %}
     <h1>ЗНАКИ ЗОДИАКА</h1>
     <ul>
-    {% for sign in signs %}
-        <li><b><a href="{% url 'name_zodiac' sign_zodiac=sign %}">{{ sign|title }}</a></b></li>
+    {% for sign, descript in signs.items %}
+        <li><b><a href="{% url 'name_zodiac' sign_zodiac=sign %}">{{ descript|split|first }}</a></b></li>
     {% endfor %}
     </ul>
 

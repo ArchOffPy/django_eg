@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from datetime import date as dt
 
-signs_zodiac = {
+signs_zodiacs = {
     'aries': 'Овен - первый знак зодиака, планета Марс (с 21 марта по 20 апреля).',
     'taurus': 'Телец - второй знак зодиака, планета Венера (с 21 апреля по 21 мая).',
     'gemini': 'Близнецы - третий знак зодиака, планета Меркурий (с 22 мая по 21 июня).',
@@ -45,9 +45,9 @@ signs_zodiac_by_day = {
 
 def index(request):
     """Главная страница со знаками зодиака"""
-    signs = list(signs_zodiac)
+    signs = list(signs_zodiacs)
     data = {
-        'signs': signs,
+        'signs': signs_zodiacs,
     }
     return render(request, 'horoscope/index.html', context=data)
 
@@ -98,21 +98,19 @@ def get_signs_about_elements(request, element):
 
 def get_info_about_sign_zodiac_by_name(request, sign_zodiac: str):
     """Получение информации о знаке зодиака по имени"""
-    signs = list(signs_zodiac)
-    description = signs_zodiac.get(sign_zodiac, None)
+    description = signs_zodiacs.get(sign_zodiac, None)
     data = {
         'description_zodiac': description,
         'incorrect_sign_zodiac': sign_zodiac,
         'sign_for_title': sign_zodiac,
-        'signs': signs,
-        'ru_name_zodiac': description.split()[0],
+        'zodiacs': signs_zodiacs,
     }
     return render(request, 'horoscope/info_zodiac.html', context=data)
 
 
 def get_info_about_sign_zodiac_by_num(request, sign_zodiac: int):
     """Получение информации о знаке зодиака по номеру"""
-    signs = list(signs_zodiac)
+    signs = list(signs_zodiacs)
     if 0 < sign_zodiac > len(signs):
         return HttpResponseNotFound(f'Не верный порядковый номер знака зодиака - {sign_zodiac}')
     sign = signs[sign_zodiac - 1]
@@ -128,7 +126,7 @@ def sign_by_day(request, month: int, day: int):
         for sign, date in signs_zodiac_by_day.items():
             if date[0] <= request_date <= date[1]:
                 redirect_url = reverse('name_zodiac', args=(sign,))
-                return HttpResponse(signs_zodiac[sign])
+                return HttpResponse(signs_zodiacs[sign])
         # return HttpResponseRedirect(redirect_url)
 
     except ValueError:

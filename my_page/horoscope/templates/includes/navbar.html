@@ -1,8 +1,17 @@
+{% load static %}
+{% load my_filter %}
+
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'horoscope/css/navbar.css' %}">
+{% endblock %}
+
 <nav>
+    <b>
     <a href="{% url 'horoscope_index'%}">Главная</a>
     <a href="{% url 'get_element_page'%}">Стихии</a>
     <a href="https://www.homeenglish.ru/OtherGoroscop.htm">Источник</a>
-    {% for sign in signs %}
-        <a href="{% url 'name_zodiac' sign_zodiac=sign %}">{{ sign|title }}</a>
+    </b>
+    {% for zodiac, description in zodiacs.items %}
+        <a href="{% url 'name_zodiac' sign_zodiac=zodiac %}">{{ description|split|first }}</a>
     {% endfor %}
 </nav>
