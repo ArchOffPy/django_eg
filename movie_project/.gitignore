@@ -1,9 +1,5 @@
 /.idea
 /.venv
-/my_page/db.sqlite3
-my_page/horoscope/__pycache__/
-my_page/my_page/__pycache__/
-my_page/week_days/__pycache__/
-my_page/geometry/__pycache__/
+db.sqlite3
 __pycache__/
 
