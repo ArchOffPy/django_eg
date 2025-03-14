@@ -45,7 +45,7 @@ signs_zodiac_by_day = {
 
 def index(request):
     """Главная страница со знаками зодиака"""
-    signs = list(signs_zodiacs)
+    # signs = list(signs_zodiacs)
     data = {
         'signs': signs_zodiacs,
     }
@@ -60,44 +60,22 @@ def get_element_page(request):
     }
     return render(request, 'horoscope/types.html', context=data)
 
-    # li_elements = ''
-    # for element in elements:
-    #     redirect_url = reverse('get_signs_about_elements', args=(element,))
-    #     li_elements += f'<li><a href={redirect_url}>{element.title()}</a></li>'
-    #
-    # response = f"""
-    # <ul>
-    #     {li_elements}
-    # </ul>
-    # """
-    # return HttpResponse(response)
-
 
 def get_signs_about_elements(request, element):
     """Получение знака зодиака из стихии"""
-    # if element not in elements_zodiac:
-    #     return HttpResponseNotFound(f'Такой стихии не существует - {element}')
-    #
-    # li_elements = ''
-    # for sign in elements_zodiac[element]:
-    #     redirect_url = reverse('name_zodiac', args=(sign,))
-    #     li_elements += f'<li><a href={redirect_url}>{sign.title()}</a></li>'
-    #
-    # response = f"""
-    #     <ul>
-    #         {li_elements}
-    #     </ul>
-    #     """
     data ={
         'signs': elements_zodiac[element],
     }
     return render(request, 'horoscope/types_signs.html', context=data)
-    # return HttpResponse(response)
+
 
 
 
 def get_info_about_sign_zodiac_by_name(request, sign_zodiac: str):
-    """Получение информации о знаке зодиака по имени"""
+    """Получение информации о знаке зодиака по имени
+    пример запроса в адресной строке: http://localhost:8000/horoscope/pisces
+    вывод: Рыбы - двенадцатый знак зодиака, планеты Юпитер (с 20 февраля по 20 марта).
+    """
     description = signs_zodiacs.get(sign_zodiac, None)
     data = {
         'description_zodiac': description,
@@ -109,7 +87,10 @@ def get_info_about_sign_zodiac_by_name(request, sign_zodiac: str):
 
 
 def get_info_about_sign_zodiac_by_num(request, sign_zodiac: int):
-    """Получение информации о знаке зодиака по номеру"""
+    """Получение информации о знаке зодиака по номеру
+    пример запроса в адресной строке: http://localhost:8000/horoscope/3
+    вывод: Близнецы - третий знак зодиака, планета Меркурий (с 22 мая по 21 июня).
+    """
     signs = list(signs_zodiacs)
     if 0 < sign_zodiac > len(signs):
         return HttpResponseNotFound(f'Не верный порядковый номер знака зодиака - {sign_zodiac}')
@@ -119,7 +100,10 @@ def get_info_about_sign_zodiac_by_num(request, sign_zodiac: int):
 
 
 def sign_by_day(request, month: int, day: int):
-    """Получение информации о знаке зодиака по месяцу и дню месяца"""
+    """Получение информации о знаке зодиака по месяцу и дню месяца
+    пример запроса в адресной строке: http://localhost:8000/horoscope/3/5
+    вывод: Рыбы - двенадцатый знак зодиака, планеты Юпитер (с 20 февраля по 20 марта).
+    """
     try:
         request_date = dt(4, month, day)
         redirect_url = ''
@@ -127,7 +111,5 @@ def sign_by_day(request, month: int, day: int):
             if date[0] <= request_date <= date[1]:
                 redirect_url = reverse('name_zodiac', args=(sign,))
                 return HttpResponse(signs_zodiacs[sign])
-        # return HttpResponseRedirect(redirect_url)
-
     except ValueError:
         return HttpResponseNotFound('Введен не верный месяц или день!')
