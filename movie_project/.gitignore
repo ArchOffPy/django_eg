@@ -1,5 +1,7 @@
 /.idea
 /.venv
-db.sqlite3
+*/db.sqlite3
+/bookshop/db.sqlite3
 __pycache__/
+
 
