@@ -9,7 +9,7 @@
 	<h2>СПИСОК ФИЛЬМОВ</h2>
     <ul>
         {% for movie in movies %}
-            <li>Название - {{ movie.name }}, рейтинг - {{ movie.rating }}%, год выпуска - {{ movie.year|default:'Не известно' }}</li>
+            <li>{{ movie.name }}: <a href={{ movie.get_url }}>просмотреть информацию</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

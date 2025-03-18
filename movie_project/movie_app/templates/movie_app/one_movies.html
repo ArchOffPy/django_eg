@@ -1,15 +1,16 @@
 {% extends "movie_app/base.html" %}
 
 {% block title %}
-    All movies
+    {{ movie.name }}
 {% endblock %}
 
 
 {% block content %}
-	<h2>СПИСОК ФИЛЬМОВ</h2>
-    <ul>
-        {% for movie in movies %}
-            <li>Название - {{ movie.name }}, рейтинг - {{ movie.rating }}%, год выпуска - {{ movie.year|default:'Не известно' }}</li>
-        {% endfor %}
-    </ul>
+	<h2>ИНФОРМАЦИЯ О ФИЛЬМЕ - "{{ movie.name }}"</h2>
+
+    <h3>Название - {{ movie.name }},</h3>
+    <h3>Рейтинг - {{ movie.rating }}%</h3>
+    <h3>Год выпуска - {{ movie.year|default:'Не известно' }}</h3>
+    <h3>Бюджет - {{ movie.budget|default:'Не известно' }} $</h3>
+
 {% endblock %}
