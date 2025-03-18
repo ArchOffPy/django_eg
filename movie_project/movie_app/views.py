@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Movie
+from django.db.models import F
 
 
 def show_all_movies(request):
-    movies = Movie.objects.all()
+    movies = Movie.objects.order_by(F("year").asc(nulls_last=True), 'rating')
 
     for movie in movies:
         movie.save()
@@ -11,7 +12,7 @@ def show_all_movies(request):
     data = {
         'movies': movies
     }
-    return render(request, 'movie_app/all_movies.html', context=data)
+    return render(request, 'movie_app/all_movies_sorted.html', context=data)
 
 
 def show_one_movies(request, slug_movie: str):
