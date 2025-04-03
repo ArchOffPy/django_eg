@@ -6,5 +6,6 @@ my_page/my_page/__pycache__/
 my_page/week_days/__pycache__/
 my_page/geometry/__pycache__/
 __pycache__/
-movie_project/db.sqlite3
+*/db.sqlite3
+
 
