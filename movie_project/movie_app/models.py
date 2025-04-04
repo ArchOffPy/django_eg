@@ -39,6 +39,9 @@ class Actor(models.Model):
         # если женский, то "Актриса... имя, фамилия"
         return f"Актриса {self.first_name} {self.last_name}"
 
+    def get_url(self):
+        return reverse("show_one_actors", args=[self.id])
+
 
 class Movie(models.Model):
     EUR = 'EUR'
