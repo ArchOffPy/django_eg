@@ -29,8 +29,8 @@ class Actor(models.Model):
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    # в параметре choces указываем список кортежей GENDERS
-    gender = models.CharField(max_length=1, choices=GENDERS)
+    # в параметре choces указываем список кортежей GENDERS, и значение по умолчанию MALE
+    gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
 
     def __str__(self):
         # если пол мужской, то отображаем "Актер... имя, фамилия"

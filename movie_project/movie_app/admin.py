@@ -40,13 +40,14 @@ class MovieAdmin(admin.ModelAdmin):
     # exclude = ['slug']
     # readonly_fields = ['budget']
     prepopulated_fields = {'slug': ('name',)}
-    list_display = ['name', 'rating', 'year', 'currency', 'rating_status', 'director']
-    list_editable = ['rating', 'year', 'currency', 'director']
+    list_display = ['name', 'rating', 'rating_status', 'director']
+    list_editable = ['rating', 'director']
     ordering = ['rating', 'name']
     list_per_page = 10
     actions = ['set_rubel', 'set_dollar']
     search_fields = ['name__startswith', 'rating']
     list_filter = ['name', RatingFilter, 'currency', ]
+    filter_horizontal = ['actors']
 
     @admin.display(ordering='rating', description='Rating')
     def rating_status(self, mov: Movie):
