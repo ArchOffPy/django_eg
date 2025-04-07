@@ -61,9 +61,9 @@ class Movie(models.Model):
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
     slug = models.SlugField(default='', null=False, db_index=True)
     # связь одни ко многим с моделью Director
-    director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True)
+    director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True, related_name='movies')
     # связь многие ко многим с моделью Actor
-    actors = models.ManyToManyField(Actor)
+    actors = models.ManyToManyField(Actor, related_name='movies')
 
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.name)
@@ -73,4 +73,4 @@ class Movie(models.Model):
         return reverse('show_one_movies', args=[self.slug])
 
     def __str__(self):
-        return f'{self.name} - {self.rating}'
+        return f'{self.name} - {self.rating}%'

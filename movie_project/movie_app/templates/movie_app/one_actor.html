@@ -11,5 +11,11 @@
     <h3>Имя - {{ actor.first_name }}</h3>
     <h3>Фамилия - {{ actor.last_name }}</h3>
     <h3>Пол - {{ actor.gender|default:'Не известно' }}</h3>
-
+    <hr>
+    <h3>СПИСОК ФИЛЬМОВ</h3>
+    <ul>
+        {% for movie in actor.movies.all %}
+            <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
